@@ -30,7 +30,7 @@ export default class FilmCardView {
     return cardOfFilm(films);
   }
 
-  getElement(films) {
+  getElement() {
     if (!this.element) {
       this.element = createElement(this.getTemplate(this.films));
     }

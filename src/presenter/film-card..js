@@ -5,6 +5,7 @@ import FilmListdView from '../view/film-list.js';
 import NewButtonView from '../view/btn-show-more.js';
 import FilmContainerView from '../view/container-films.js';
 import AllFilms from '../view/all-films.js';
+import FilmExtraView from '../view/film-extra.js';
 
 const list = [
   {
@@ -59,10 +60,34 @@ const list = [
   }
 ];
 
+const topRated = [
+  {
+    title: 'The Man with the Golden Arm',
+    rating: 9.0,
+    year: 1955,
+    duration: '1h 59m',
+    genre: 'Drama',
+    src: './images/posters/the-man-with-the-golden-arm.jpg',
+    description: 'Frankie Machine (Frank Sinatra) is released from the federal Narcotic Farm in Lexington, Kentucky with a set of drums and a new outlook on…',
+    comments: '18 comments'
+  },
+  {
+    title: 'The Great Flamarion',
+    rating: 8.9,
+    year: 1945,
+    duration: '1h 18m',
+    genre: 'Mystery',
+    src: './images/posters/the-great-flamarion.jpg',
+    description: 'The film opens following a murder at a cabaret in Mexico City in 1936, and then presents the events leading up to it in flashback. The Grea…',
+    comments: '12 comments'
+  }
+];
+
 export default class FilmCardPresenter {
   list = new FilmListdView();
   container = new FilmContainerView();
   allFilms = new AllFilms();
+
   init = (filmContainer) => {
     this.filmContainer = filmContainer;
 
@@ -74,5 +99,13 @@ export default class FilmCardPresenter {
       render(new FilmCardView(list[i]), this.container.getElement());
     }
     render(new NewButtonView(), this.list.getElement());
+    for (let i = 0; i < 2; i++){
+      const extra = new FilmExtraView();
+      const container =new FilmContainerView();
+      render(extra, this.allFilms.getElement());
+      render(container, extra.getElement() );
+      topRated.map((el)=> render(new FilmCardView(el), container.getElement()) );
+    }
+
   };
 }
